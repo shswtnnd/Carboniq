@@ -95,7 +95,7 @@ export default function FloatingProgressOverlay() {
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-500" />
               </span>
 
-              <span className="font-[family-name:var(--font-manrope)] text-sm font-semibold text-zinc-700">
+              <span className="font-[family-name:var(--font-space-grotesk)] text-sm font-semibold text-zinc-700">
                 step {Math.min(currentMilestone, MILESTONES.length)} of {MILESTONES.length}
               </span>
 
@@ -120,7 +120,7 @@ export default function FloatingProgressOverlay() {
             >
               {/* header */}
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-[family-name:var(--font-manrope)] text-sm font-bold text-zinc-800">
+                <h3 className="font-[family-name:var(--font-space-grotesk)] text-sm font-bold text-zinc-800">
                   your progress
                 </h3>
                 <button

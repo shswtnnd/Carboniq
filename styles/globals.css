@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@plugin '../hero.ts';
+
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-space-grotesk: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-bricolage: var(--font-bricolage), system-ui, sans-serif;
+  --font-instrument-serif: var(--font-instrument-serif), Georgia, serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.gradient-stripe-band {
+  position: absolute;
+  inset: -20%;
+  transform: rotate(-18deg) scale(1.15);
+  filter: blur(44px);
+  opacity: 0.42;
+  animation: stripes-drift 26s ease-in-out infinite;
+}
+
+.gradient-stripe-band--one {
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(34, 197, 94, 0.28) 22%,
+    rgba(14, 165, 233, 0.16) 46%,
+    transparent 72%
+  );
+}
+
+.gradient-stripe-band--two {
+  background: linear-gradient(
+    108deg,
+    transparent 0%,
+    rgba(14, 165, 233, 0.16) 20%,
+    rgba(30, 41, 59, 0.34) 48%,
+    transparent 74%
+  );
+  animation-delay: -8s;
+  opacity: 0.34;
+}
+
+.gradient-stripe-band--three {
+  background: linear-gradient(
+    112deg,
+    transparent 0%,
+    rgba(34, 197, 94, 0.2) 26%,
+    rgba(15, 23, 42, 0.38) 55%,
+    transparent 78%
+  );
+  animation-delay: -14s;
+  opacity: 0.3;
+}
+
+.noise-overlay {
+  opacity: 0.03;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.85) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+.bg-gradient-ambient {
+  background-size: 200% 200%;
+  animation: gradient-shift 20s ease infinite;
+}
+
+.hero-particles {
+  opacity: 0.15;
+  background-image:
+    radial-gradient(1px 1px at 10% 18%, rgba(255, 255, 255, 0.95) 50%, transparent 100%),
+    radial-gradient(1px 1px at 24% 72%, rgba(255, 255, 255, 0.82) 50%, transparent 100%),
+    radial-gradient(1px 1px at 39% 38%, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
+    radial-gradient(1px 1px at 57% 24%, rgba(255, 255, 255, 0.84) 50%, transparent 100%),
+    radial-gradient(1px 1px at 73% 62%, rgba(255, 255, 255, 0.88) 50%, transparent 100%),
+    radial-gradient(1px 1px at 86% 34%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+  animation: particles-drift 95s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes stripes-drift {
+  0% {
+    transform: rotate(-18deg) translate3d(-7%, 0, 0) scale(1.12);
+  }
+  50% {
+    transform: rotate(-18deg) translate3d(4%, -2%, 0) scale(1.16);
+  }
+  100% {
+    transform: rotate(-18deg) translate3d(-7%, 0, 0) scale(1.12);
+  }
+}
+
+@keyframes particles-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-28px, -14px, 0);
+  }
+}
