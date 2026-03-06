@@ -1,110 +1,67 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import MinimalAmbientBackground from "@/components/ui/minimal-ambient-background";
+import { Scale, Star, Zap } from "lucide-react";
 
-type Feature = {
+type FeatureCardData = {
   title: string;
   description: string;
-  visual: "pie" | "bar" | "recommendation";
+  icon: React.ComponentType<{ className?: string }>;
+  glowClass: string;
+  ringClass: string;
 };
 
-const features: Feature[] = [
+const cards: FeatureCardData[] = [
   {
-    title: "Measure Your Carbon Footprint",
-    description:
-      "Track emissions from electricity, fuel usage, waste, and transportation to understand the total carbon impact of your campus.",
-    visual: "pie",
+    title: "Measure Carbon Footprint",
+    description: "Measure campus emissions with one clear baseline.",
+    icon: Scale,
+    glowClass: "from-[#7c3aed]/35 to-[#312e81]/20",
+    ringClass: "border-[#8b5cf6]/55 shadow-[0_0_28px_rgba(124,58,237,0.45)]",
   },
   {
-    title: "Identify High-Impact Sources",
-    description:
-      "Break down emissions by buildings, departments, or energy sources to quickly identify the largest contributors.",
-    visual: "bar",
+    title: "Identify Sources",
+    description: "Spot top emission sources in seconds.",
+    icon: Star,
+    glowClass: "from-[#0ea5e9]/35 to-[#0f172a]/20",
+    ringClass: "border-[#38bdf8]/55 shadow-[0_0_28px_rgba(56,189,248,0.42)]",
   },
   {
-    title: "Actionable Sustainability Insights",
-    description:
-      "Receive practical recommendations that help institutions reduce emissions and move toward more sustainable operations.",
-    visual: "recommendation",
+    title: "Get Recommendations",
+    description: "Get practical next steps to reduce emissions.",
+    icon: Zap,
+    glowClass: "from-[#84cc16]/35 to-[#14532d]/20",
+    ringClass: "border-[#84cc16]/55 shadow-[0_0_28px_rgba(132,204,22,0.42)]",
   },
 ];
 
-function CardVisual({ type }: { type: Feature["visual"] }) {
-  if (type === "pie") {
-    return (
-      <div className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-[#0b1220] p-4">
-        <div className="h-16 w-16 rounded-full bg-[conic-gradient(#22C55E_0_42%,#4ADE80_42%_68%,#86efac_68%_84%,#14532d_84%_100%)]" />
-        <div className="space-y-1 text-xs text-[#cbd5e1]">
-          <p>Electricity</p>
-          <p>Transport</p>
-          <p>Waste</p>
-          <p>Fuel</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "bar") {
-    return (
-      <div className="rounded-xl border border-white/10 bg-[#0b1220] p-4">
-        <div className="flex h-20 items-end gap-3">
-          <div className="h-10 w-8 rounded-t-md bg-[#22C55E]" />
-          <div className="h-14 w-8 rounded-t-md bg-[#4ADE80]" />
-          <div className="h-16 w-8 rounded-t-md bg-[#86efac]" />
-        </div>
-        <div className="mt-2 flex justify-between text-[11px] text-[#cbd5e1]">
-          <span>Library</span>
-          <span>Hostel</span>
-          <span>Engineering</span>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-xl border border-white/10 bg-[#0b1220] p-4 text-xs text-[#cbd5e1]">
-      <p className="mb-2 text-[#86efac]">Recommendation panel</p>
-      <ul className="space-y-1">
-        <li>- Install solar panels</li>
-        <li>- Switch to LED lighting</li>
-        <li>- Reduce generator usage</li>
-      </ul>
-    </div>
-  );
-}
-
-function FeatureCard({ feature }: { feature: Feature }) {
-  const [mouse, setMouse] = useState({ x: 50, y: 50, hover: false });
+function NeonFeatureCard({ card }: { card: FeatureCardData }) {
+  const Icon = card.icon;
 
   return (
     <motion.article
-      className="group relative rounded-2xl border border-white/12 bg-black p-8 shadow-[0_16px_40px_rgba(2,6,23,0.45)]"
-      style={{
-        backgroundImage: mouse.hover
-          ? `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(34,197,94,0.12), transparent 40%)`
-          : undefined,
-      }}
-      onMouseMove={(event) => {
-        const rect = event.currentTarget.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width) * 100;
-        const y = ((event.clientY - rect.top) / rect.height) * 100;
-        setMouse({ x, y, hover: true });
-      }}
-      onMouseEnter={() => setMouse((prev) => ({ ...prev, hover: true }))}
-      onMouseLeave={() => setMouse({ x: 50, y: 50, hover: false })}
-      whileHover={{ y: -6, scale: 1.02, rotateX: 4, rotateY: -4 }}
-      transition={{ type: "spring", stiffness: 220, damping: 20 }}
+      className={`group relative overflow-hidden rounded-[28px] border bg-[#040812]/78 p-7 backdrop-blur-xl transition-all duration-300 ${card.ringClass}`}
+      whileHover={{ y: -6, scale: 1.01 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
     >
-      <div className="flex flex-col gap-4">
-        <CardVisual type={feature.visual} />
-        <h3 className="font-[family-name:var(--font-space-grotesk)] text-2xl font-bold tracking-tight text-[#E5E7EB]">
-          {feature.title}
-        </h3>
-        <p className="text-base leading-relaxed text-[#cbd5e1]">{feature.description}</p>
+      <div className={`pointer-events-none absolute inset-0 bg-gradient-to-b ${card.glowClass}`} />
+      <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(rgba(255,255,255,0.16)_1px,transparent_1px)] [background-size:20px_20px]" />
+
+      <div className="relative z-10 flex min-h-[290px] flex-col justify-between">
+        <div className="mx-auto mt-2 flex h-28 w-28 items-center justify-center rounded-[28px] border border-white/15 bg-black/35 shadow-inner">
+          <Icon className="h-12 w-12 text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]" />
+        </div>
+
+        <div className="pt-8 text-center">
+          <h3 className="font-[family-name:var(--font-space-grotesk)] text-[42px] font-semibold leading-none tracking-tight text-white">
+            {card.title.split(" ").slice(0, 1)}
+          </h3>
+          <h4 className="mt-1 font-[family-name:var(--font-space-grotesk)] text-4xl font-semibold leading-none tracking-tight text-white">
+            {card.title.split(" ").slice(1).join(" ")}
+          </h4>
+          <p className="mt-3 text-lg text-white/75">{card.description}</p>
+        </div>
       </div>
-      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent transition-all duration-300 group-hover:border-white/25" />
     </motion.article>
   );
 }
@@ -113,27 +70,25 @@ export default function FeaturesSection() {
   return (
     <motion.section
       id="features"
-      className="relative overflow-hidden bg-[#020617] px-6 py-24"
-      initial={{ opacity: 0, y: 50 }}
+      className="relative overflow-hidden bg-transparent px-6 py-24"
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <MinimalAmbientBackground />
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <h2 className="font-[family-name:var(--font-space-grotesk)] text-4xl font-extrabold tracking-tight text-[#E5E7EB] md:text-5xl">
-            Understand Your Campus Carbon Impact
+          <h2 className="font-[family-name:var(--font-space-grotesk)] text-5xl font-extrabold tracking-tight text-white">
+            Campus Features That Actually Help
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-[#cbd5e1]">
-            Carboniq helps institutions measure emissions, analyze environmental impact,
-            and take practical steps toward sustainability.
+          <p className="mt-4 text-lg leading-relaxed text-white/85">
+            focused tools to measure, identify, and improve your institution&apos;s carbon outcomes.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {features.map((feature) => (
-            <FeatureCard key={feature.title} feature={feature} />
+          {cards.map((card) => (
+            <NeonFeatureCard key={card.title} card={card} />
           ))}
         </div>
       </div>

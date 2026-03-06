@@ -1,10 +1,10 @@
 "use client";
 
-import GradientStripesBackground from "@/components/ui/gradient-stripes-background";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import HashScrollLink from "@/components/HashScrollLink";
 
 export default function Hero() {
   const words = [
@@ -15,7 +15,7 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      <GradientStripesBackground className="absolute inset-0" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(34,197,94,0.16),transparent_38%),linear-gradient(to_bottom,rgba(2,6,23,0.42),rgba(2,6,23,0.64))]" />
 
       <div className="absolute inset-0 z-20 mx-auto flex h-full max-w-7xl items-center justify-center px-6">
         <div className="w-full max-w-4xl space-y-8 text-center">
@@ -49,19 +49,19 @@ export default function Hero() {
               as={Link}
               href="/auth?next=/dashboard"
               radius="full"
-              className="inline-flex h-auto items-center gap-2 rounded-full bg-[#B6FF00] px-8 py-4 text-lg font-semibold text-black transition-all duration-200 hover:scale-[1.02] hover:brightness-95 active:scale-[0.98]"
+              className="group inline-flex h-14 min-w-[220px] items-center justify-center gap-2 rounded-full bg-[#B6FF00] px-8 text-base font-semibold text-black transition-all duration-200 hover:scale-[1.02] hover:brightness-95 active:scale-[0.98]"
             >
-              <ArrowRight size={20} strokeWidth={2.5} />
+              <ArrowRight size={20} strokeWidth={2.5} className="transition-transform duration-200 group-hover:translate-x-1" />
               Get Started Now
             </Button>
-            <Button
-              as={Link}
-              href="/#pricing"
-              radius="full"
-              className="inline-flex h-auto items-center justify-center rounded-full bg-white px-9 py-4 text-base font-semibold leading-none tracking-tight text-[#0f172a] transition-all duration-200 hover:scale-[1.02] hover:brightness-95 active:scale-[0.98]"
-            >
-              See Pricing
-            </Button>
+            <HashScrollLink href="/#pricing">
+              <Button
+                radius="full"
+                className="inline-flex h-14 min-w-[220px] items-center justify-center rounded-full border border-white/25 bg-white/90 px-8 text-base font-semibold leading-none tracking-tight text-[#0f172a] shadow-[0_10px_30px_rgba(2,6,23,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_14px_40px_rgba(2,6,23,0.35)] active:translate-y-0"
+              >
+                See Pricing
+              </Button>
+            </HashScrollLink>
           </div>
         </div>
       </div>

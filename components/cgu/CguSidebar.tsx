@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Building2, FileText, Gauge, Lightbulb } from "lucide-react";
+import { Building2, FileText, Gauge, Lightbulb, X } from "lucide-react";
 
 const items = [
   { label: "Dashboard", href: "/cgu-odisha/dashboard", icon: Gauge },
@@ -11,11 +11,16 @@ const items = [
   { label: "Report", href: "/cgu-odisha/report", icon: FileText },
 ];
 
-export default function CguSidebar() {
+type CguSidebarProps = {
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
+};
+
+function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[#0b1220] p-6 lg:block">
+    <>
       <p className="font-[family-name:var(--font-space-grotesk)] text-2xl font-bold text-[#E5E7EB]">
         Carbon<span className="text-[#22C55E]">iq</span>
       </p>
@@ -30,6 +35,7 @@ export default function CguSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
                 item.label === "Recommendations"
                   ? active
@@ -48,6 +54,39 @@ export default function CguSidebar() {
           );
         })}
       </nav>
-    </aside>
+    </>
+  );
+}
+
+export default function CguSidebar({ mobileOpen = false, onCloseMobile }: CguSidebarProps) {
+  return (
+    <>
+      <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-[#0b1220] p-6 lg:block">
+        <SidebarNav />
+      </aside>
+
+      <div
+        className={`fixed inset-0 z-40 bg-black/55 backdrop-blur-sm transition-opacity lg:hidden ${
+          mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={onCloseMobile}
+      />
+
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-[84vw] max-w-xs border-r border-white/10 bg-[#0b1220] p-5 shadow-2xl transition-transform duration-300 lg:hidden ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <button
+          type="button"
+          onClick={onCloseMobile}
+          className="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/85"
+          aria-label="Close sidebar"
+        >
+          <X size={18} />
+        </button>
+        <SidebarNav onNavigate={onCloseMobile} />
+      </aside>
+    </>
   );
 }

@@ -27,16 +27,16 @@ const sourceRows = [
 export default function CguDashboardPage() {
   return (
     <motion.div
-      className="flex h-[calc(100vh-210px)] min-h-[560px] flex-col gap-4"
+      className="flex min-h-0 flex-col gap-4 lg:h-[calc(100vh-210px)] lg:min-h-[560px]"
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <div className="grid min-h-0 gap-4 xl:grid-cols-[1.6fr_1fr]">
         <Card className="overflow-hidden border border-white/10 bg-[#111827]/95">
-          <CardBody className="space-y-4 p-5">
+          <CardBody className="space-y-4 p-4 sm:p-5">
             <div className="flex items-center justify-between">
-              <h2 className="font-[family-name:var(--font-space-grotesk)] text-2xl font-bold tracking-tight">
+              <h2 className="font-[family-name:var(--font-space-grotesk)] text-xl font-bold tracking-tight sm:text-2xl">
                 Energy Flow
               </h2>
               <span className="rounded-full border border-white/15 px-3 py-1 text-xs text-[#cbd5e1]">
@@ -74,7 +74,7 @@ export default function CguDashboardPage() {
         </Card>
 
         <Card className="border border-white/10 bg-[#111827]/95">
-          <CardBody className="space-y-2 p-5">
+          <CardBody className="space-y-2 p-4 sm:p-5">
             <p className="text-xs uppercase tracking-[0.22em] text-[#94a3b8]">Sustainability Score</p>
             <p className="text-4xl font-extrabold text-[#E5E7EB]">68</p>
             <p className="text-base text-[#bbf7d0]">Grade B</p>
@@ -88,8 +88,8 @@ export default function CguDashboardPage() {
         </Card>
       </div>
 
-      <Card className="min-h-0 flex-1 overflow-hidden border border-white/10 bg-[#111827]">
-        <CardBody className="h-full overflow-hidden p-4 md:p-5">
+      <Card className="min-h-[240px] overflow-hidden border border-white/10 bg-[#111827] lg:min-h-0 lg:flex-1">
+        <CardBody className="h-[240px] overflow-hidden p-4 md:p-5 lg:h-full">
           <Line
             data={{
               labels: cguMonthlyTrend.labels,

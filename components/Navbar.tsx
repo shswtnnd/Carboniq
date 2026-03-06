@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@heroui/react";
+import HashScrollLink from "@/components/HashScrollLink";
 
 type NavbarProps = {
   transparent?: boolean;
@@ -75,20 +76,20 @@ export default function Navbar({ transparent = false }: NavbarProps) {
               Home
               <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#22C55E] transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link
+            <HashScrollLink
               href="/#features"
               className="group relative font-[family-name:var(--font-space-grotesk)] transition-colors hover:text-white"
             >
               Features
               <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#22C55E] transition-all duration-300 group-hover:w-full" />
-            </Link>
-            <Link
+            </HashScrollLink>
+            <HashScrollLink
               href="/#pricing"
               className="group relative font-[family-name:var(--font-space-grotesk)] transition-colors hover:text-white"
             >
               Pricing
               <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-[#22C55E] transition-all duration-300 group-hover:w-full" />
-            </Link>
+            </HashScrollLink>
           </div>
 
           <Button
