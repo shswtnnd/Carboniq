@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Button,
@@ -46,13 +46,6 @@ function saveSession(name: string, email: string) {
 
 export default function AuthPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const nextParam = searchParams.get("next");
-  const nextPath =
-    useMemo(
-      () => (nextParam && nextParam.startsWith("/") ? nextParam : "/dashboard"),
-      [nextParam],
-    );
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -62,7 +55,14 @@ export default function AuthPage() {
   const [error, setError] = useState("");
 
   const goToNext = () => {
-    router.push(nextPath);
+    if (typeof window === "undefined") {
+      router.push("/dashboard");
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    const nextParam = params.get("next");
+    const safePath = nextParam && nextParam.startsWith("/") ? nextParam : "/dashboard";
+    router.push(safePath);
   };
 
   const handleSignup = () => {
