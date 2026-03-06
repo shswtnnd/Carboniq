@@ -28,10 +28,6 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-transparent px-6 pb-20 pt-[120px]">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(2,6,23,0.2),rgba(2,6,23,0.26))]" />
-      <div className="pointer-events-none absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(148,163,184,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.14)_1px,transparent_1px)] [background-size:36px_36px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(34,197,94,0.12),transparent_45%)]" />
-
       <div className="relative z-10 mx-auto max-w-6xl">
         <p className="pointer-events-none mb-12 text-center font-[family-name:var(--font-space-grotesk)] text-[clamp(72px,15vw,176px)] font-bold tracking-[-0.03em] text-white/28">
           Carbon
@@ -142,9 +138,9 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 border-t border-white/10 pt-6 text-center text-sm text-white/60">
-          <p>(c) 2026 Carboniq</p>
+          <p>© 2026 Carboniq</p>
           <p className="mt-1">Carbon Intelligence for Campuses</p>
-          <p className="mt-1">Made with love at CGU, Odisha</p>
+          <p className="mt-1">Made with ❤️ at CGU, Odisha</p>
         </div>
       </div>
     </footer>

@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="relative text-[#E5E7EB]">
       <HomeBackgroundShader className="fixed inset-0" />
-      <div className="pointer-events-none fixed inset-0 z-[1] bg-[linear-gradient(to_bottom,rgba(2,6,23,0.3),rgba(2,6,23,0.22)_58%,rgba(2,6,23,0.2))]" />
+      <div className="pointer-events-none fixed inset-0 z-[1] bg-[linear-gradient(to_bottom,rgba(2,6,23,0.24),rgba(2,6,23,0.24)),radial-gradient(circle_at_50%_18%,rgba(236,255,210,0.06),transparent_36%)]" />
       <div className="relative z-10">
         <Navbar transparent />
         <Hero />
