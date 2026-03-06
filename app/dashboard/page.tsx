@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import DashboardCards from "@/components/DashboardCards";
 import Charts from "@/components/Charts";
 import Sidebar from "@/components/Sidebar";
@@ -33,6 +35,19 @@ const metrics = [
 ];
 
 export default function DashboardPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    try {
+      const session = window.localStorage.getItem("carboniq_session_v1");
+      if (!session) {
+        router.replace("/auth?next=/dashboard");
+      }
+    } catch {
+      router.replace("/auth?next=/dashboard");
+    }
+  }, [router]);
+
   return (
     <main className="relative flex min-h-screen overflow-hidden bg-[#020617] text-[#E5E7EB]">
       <MinimalAmbientBackground className="opacity-45" />

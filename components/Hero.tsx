@@ -47,7 +47,7 @@ export default function Hero() {
           <div className="flex flex-wrap justify-center gap-4">
             <Button
               as={Link}
-              href="/dashboard"
+              href="/auth?next=/dashboard"
               radius="full"
               className="inline-flex h-auto items-center gap-2 rounded-full bg-[#B6FF00] px-8 py-4 text-lg font-semibold text-black transition-all duration-200 hover:scale-[1.02] hover:brightness-95 active:scale-[0.98]"
             >
@@ -56,7 +56,7 @@ export default function Hero() {
             </Button>
             <Button
               as={Link}
-              href="/pricing"
+              href="/#pricing"
               radius="full"
               className="inline-flex h-auto items-center justify-center rounded-full bg-white px-9 py-4 text-base font-semibold leading-none tracking-tight text-[#0f172a] transition-all duration-200 hover:scale-[1.02] hover:brightness-95 active:scale-[0.98]"
             >

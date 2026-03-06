@@ -9,7 +9,7 @@ const footerLinks = {
     { label: "Home", href: "/" },
     { label: "Features", href: "/#features" },
     { label: "Pricing", href: "/#pricing" },
-    { label: "Dashboard", href: "/dashboard" },
+    { label: "Dashboard", href: "/auth?next=/dashboard" },
   ],
   company: [
     { label: "About", href: "/about" },
@@ -54,7 +54,7 @@ export default function Footer() {
 
           <div className="flex justify-start md:justify-end">
             <Link
-              href="/dashboard"
+              href="/auth?next=/dashboard"
               className="group inline-flex items-center gap-3 rounded-full border border-[#22C55E]/50 bg-[#0b1a12]/55 px-5 py-3 text-[#86efac] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#22C55E] hover:bg-[#22C55E]/18"
             >
               <span className="rounded-full bg-[#22C55E]/18 p-2 text-[#4ADE80] transition-colors group-hover:bg-[#22C55E]/28">

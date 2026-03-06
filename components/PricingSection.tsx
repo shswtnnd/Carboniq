@@ -115,7 +115,7 @@ export default function PricingSection() {
 
               <Button
                 as={Link}
-                href="/dashboard"
+                href="/auth?next=/dashboard"
                 radius="full"
                 variant="bordered"
                 className="mt-6 w-full rounded-full border border-[#22C55E]/60 text-base font-semibold text-[#86efac] transition-all duration-300 hover:bg-[#22C55E] hover:text-black"
